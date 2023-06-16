@@ -1,0 +1,14 @@
+.centered-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust this value to fit your requirements */
+    border: solid 1px red;
+}
+
+
+form {
+    width: 100%;
+    margin: 0 30% 0 30%;
+}
+  
