@@ -16,63 +16,113 @@
 </head>
 
 <body>
-    <div class="container">
-        <form action="" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="row mb-2">
-                <div class="col">
-                    <label for="formGroupExampleInput" class="form-label">First Name</label>
-                    <input type="text" name="first_name" class="form-control">
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+
+        <div class="container">
+
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h1 style="text-align: center; color: #2e7be3;">VISITOR'S FORM</h1>
+                <div class="row mb-2">
+                    <div class="col">
+                        <label for="formGroupExampleInput" class="form-label">First Name</label>
+                        <input type="text" name="first_name" class="form-control" required>
+                    </div>
+                    <div class="col">
+                        <label for="formGroupExampleInput" class="form-label">Last Name</label>
+                        <input type="text" name="last_name" class="form-control" required>
+                    </div>
                 </div>
-                <div class="col">
-                    <label for="formGroupExampleInput" class="form-label">Last Name</label>
-                    <input type="text" name="last_name" class="form-control">
+                <div class="row mb-2">
+                    <div class="col">
+                        <label for="formGroupExampleInput" class="form-label">Contact Number</label>
+                        <input type="text" name="contact_number" class="form-control" required>
+                    </div>
                 </div>
-            </div>
-            <div class="row mb-2">
-                <div class="col">
-                    <label for="formGroupExampleInput" class="form-label">Contact Number</label>
-                    <input type="number" name="contact_number" class="form-control">
+                <div class="row mb-2">
+                    <div class="col">
+                        <label for="inputAutoAddLabel" class="form-label">Person to Visit</label>
+                        <select id="AutoAddLabel" name="person_to_visit" class="form-select mb-2" required>
+                              {% for i in staff %}
+                        <option value="{{i.id}}">{{i.staff_name}} - {{i.which_department}}</option>
+                              {% endfor %}
+                      </select>
+                    </div>
                 </div>
-            </div>
-            <div class="row mb-2">
-                <div class="col">
-                    <label for="inputAutoAddLabel" class="form-label">Person to Visit</label>
-                    <select id="AutoAddLabel" name="person_to_visit" class="form-select mb-2">
-                      {% for i in staff %}
-                <option value="{{i.id}}">{{i.staff_name}}</option>
-                      {% endfor %}
-              </select>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="formGroupExampleInput" class="form-label">Purpose</label>
+                        <input type="text" name="purpose" class="form-control" required>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <img class="photopreview" id="preview-selected-image">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <input class="mb-2" type="file" id="file-upload" name="picture" accept="image/gif, image/jpeg, image/png" onchange="previewImage(event);" hidden>
+                        <button type="button" class="btn" id="custom-btn" onclick="defaultBtnActive()"><i class="bi bi-cloud-arrow-up-fill"></i> Upload Image</button>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <button type="submit" class="btn">Register</button>
+                    </div>
 
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col">
-                    <label for="formGroupExampleInput" class="form-label">Purpose</label>
-                    <input type="text" name="purpose" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-2">
-                <div class="col">
-                    <input id="picture" type="file" name="picture">
-                    <button hidden type="submit" class="btn" onclick="defaultBtnActive()" id="custom-btn"><i class="bi bi-camera-fill"></i> Upload Image</button>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="preview">
+                            <img id="preview-selected-image" />
+                        </div>
+
+                    </div>
 
                 </div>
-            </div>
-            <div class="row mb-2">
-                <div class="col">
-                    <button type="submit" class="btn">Register</button>
-                </div>
+            </form>
+        </div>
 
-            </div>
-        </form>
-    </div>
+    </ul>
+    <script>
+        //BUTTON "UPLOAD PHOTO" FUNCTION
+        const defaultBtn = document.querySelector("#file-upload");
+        const customBtn = document.querySelector("#custom-btn");
 
+        function defaultBtnActive() {
+            defaultBtn.click();
+        }
+        // UPLOAD PHOTO
+        const previewImage = (event) => {
+
+            const imageFiles = event.target.files;
+            const imageFilesLength = imageFiles.length;
+
+            if (imageFilesLength > 0) {
+                const imageSrc = URL.createObjectURL(imageFiles[0]);
+                const imagePreviewElement = document.querySelector("#preview-selected-image");
+                imagePreviewElement.src = imageSrc;
+                imagePreviewElement.style.display = "block";
+            }
+        };
+    </script>
     <!-- Javascript Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
 
 </body>
+
 
 </html>
