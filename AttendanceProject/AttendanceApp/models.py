@@ -9,7 +9,7 @@ class Visitors(models.Model):
     person_to_visit = models.ForeignKey("Staffs", on_delete=models.CASCADE)
     purpose = models.CharField(max_length=500, null=True, blank=True)
     picture = models.FileField(upload_to ='pictures/', null=True, blank=True)
-  
+    status = models.CharField(max_length=255, null=True, blank=True)
     class Meta:
         verbose_name_plural = "Visitors" 
 
