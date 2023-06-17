@@ -17,6 +17,8 @@ from django.db.models import Q, Count, Sum
 installed_apps = ['AttendanceApp']
 
 
+def generate_rfid():
+    return str(uuid.uuid4())[:8]  # Generate a unique RFID value (e.g., first 8 characters of a UUID)
 
 def visitor(request):
     if request.method=='POST':
@@ -26,8 +28,8 @@ def visitor(request):
         person_to_visit = request.POST.get('person_to_visit')
         purpose = request.POST.get('purpose')
         picture = request.FILES["picture"]
-        # data = Schedule.objects.create(gSheetLink = gSheetLink, school_year = school_year, semester = semester)
-        # data.save()
+        data = Visitors.objects.create(first_name = first_name, last_name = last_name, contact_number = contact_number, person_to_visit = person_to_visit, purpose = purpose, picture = picture, status = '')
+        data.save()
         return redirect('/visitor')
     return render(request, 'AttendanceApp/visitor.html')
 
