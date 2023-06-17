@@ -49,6 +49,7 @@ def visitor(request):
         os.startfile("http://127.0.0.1:8000/media/pictures/"+rfid+".png")
 
         # BATS END
+        messages.success(request, 'Successfully registered.')
         return redirect('/visitor')
 
     context = {'staff':staff}
