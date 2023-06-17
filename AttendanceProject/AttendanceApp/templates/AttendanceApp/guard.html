@@ -55,17 +55,17 @@
 
         <!-- Container -->
         <div class="main">
-            <form class="container">
+            <div class="container">
 
                 <div class="row row-cols-1 row-cols-md-2 g-4">
 
                     <div class="col">
                         <div class="card mb-2">
-                            <h4 class="card-title mb-4">Product Information</h4>
+                            <h4 class="card-title mb-4">Scan QR Code</h4>
                             <div class="mb-1">
                                 <label for="inputBarcode" class="form-label">Barcode</label>
                                 <div class="input-group mb-2">
-                                    <button type="button" class="btn mb-3" data-bs-toggle="modal" data-bs-target="#editModal">Generate</button>
+                                    <button type="button" class="btn mb-3" data-bs-toggle="modal" data-bs-target="#editModal">Start Scan</button>
                                     <input type="text" class="form-control mb-3" id="inputBarcode" />
                                     <button type="button" class="btn mb-3" data-bs-toggle="modal" data-bs-target="#searchModal">Search</button>
                                 </div>
@@ -75,46 +75,54 @@
 
                         <div class="col">
                             <div class="card mb-2">
-                                <h4 class="card-title mb-4">Visitor's List</h4>
-                                <div class="mb-2">
-                                    <label for="inputDepartment" class="form-label">Department</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="inputDepartment" />
-                                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#newDepModal">New</button>
-                                    </div>
-                                </div>
-                                <div class="mb-2">
-                                    <label for="inputSub-Department" class="form-label">Sub-Department</label>
-                                    <input type="text" class="form-control" id="inputSub-Department" />
-                                </div>
-                                <div class="mb-2">
-                                    <label for="inputSupplier" class="form-label">Supplier</label>
-                                    <input type="text" class="form-control" id="inputSupplier" />
-                                </div>
-                                <div class="mb-2">
-                                    <label for="inputAgeLimit" class="form-label">Age Limit</label>
-                                    <input type="text" class="form-control" id="inputAgeLimit" />
-                                </div>
-                                <div class="mb-2">
-                                    <label for="inputCapacity" class="form-label">Capacity</label>
-                                    <input type="text" class="form-control" id="inputCapacity" />
-                                </div>
-                                <div class="row1 row mb-2">
-                                    <div class="col">
-                                        <label for="inputVAT" class="form-label">VAT</label>
-                                        <div class="input-group mb-0">
-                                            <input type="text" class="form-control" id="inputVAT" />
-                                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#vatModal">VAT</button>
+                                <form action="/add_staff" method="post">
+                                    {% csrf_token %}
+                                    <h4 class="card-title mb-4">Staff</h4>
+                                    <div class="mb-2">
+                                        <label for="inputDepartment" class="form-label">Full Name</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="staff_name" id="inputDepartment" required />
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="row1 row mb-2">
+                                        <div class="col">
+                                            <label for="inputVAT" class="form-label">Department</label>
+                                            <div class="input-group mb-0">
+                                                <input type="text" class="form-control" name="which_department" id="inputVAT" required />
+                                                <button type="submit" class="btn" data-bs-toggle="modal" data-bs-target="#vatModal">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
 
+                    <div class="col">
+                        <div class="col">
 
+                            <!-- Auto add Label -->
+                            <div class="card mb-2">
+                                <h4 class="card-title mb-4">Search Result</h4>
+                                <div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="inputAutoAddLabel" class="form-label">Auto Add Label</label>
+                                            <select id="AutoAddLabel" name="AutoAddLabel" class="form-select mb-2">
+                                        <!--<option selected="selected">Yes</option>-->
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                      </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Search Result -->
+                        </div>
+                    </div>
                 </div>
-            </form>
+            </div>
         </div>
 
         <!-- Modal for Edit -->
@@ -264,212 +272,6 @@
         </div>
         <!-- End of Modal for Edit -->
 
-        <!-- Modal for Search -->
-        <div class="modal fade modal" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="searchModalLabel">Search Keyword</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="card mb-3">
-                            <div>
-                                <div class="row mb-2">
-
-                                    <div class="form-check col">
-                                        <input class="form-check-input" type="radio" name="radioBtn1" id="radioBtn1" />
-                                        <label class="form-check-label" for="radioBtn1">
-                                                    PLU, Barcode, Description
-                                            </label>
-                                    </div>
-                                    <div class="form-check col">
-                                        <input class="form-check-input" type="radio" name="radioBtn1" id="radioBtn2" />
-                                        <label class="form-check-label" for="radioBtn2">
-                                                    Item Code Only
-                                            </label>
-                                    </div>
-
-
-
-                                </div>
-                                <div class="mb-3">
-                                    <label for="searchDataList" class="form-label">Search:</label>
-                                    <input class="form-control" list="datalistOptions" id="searchDataList" />
-                                    <datalist id="datalistOptions">
-                                    <option value="San Francisco"></option>
-                                    <option value="New York"></option>
-                                    <option value="Seattle"></option>
-                                    <option value="Los Angeles"></option>
-                                    <option value="Chicago"></option>
-                                </datalist>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="exampleDataList" class="form-label">Search Results:</label>
-                                    <div class="col-sm-12" style="border: 1px solid rgba(0, 0, 0, .25); height: 200px; border-radius: 5px;">
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <button type="button" class="btn">Add</button>
-                                </div>
-
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End of Modal for Search -->
-        <!-- Modal for VAT -->
-        <div class="modal fade" id="vatModal" tabindex="-1" aria-labelledby="vatModalModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="vatModalModalLabel">Value Added Tax</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="card mb-3">
-                            <div>
-                                <div class="mb-3">
-                                    <label for="inputVAT2" class="col-sm-3 col-form-label">VAT Type</label>
-                                    <div class="col-sm-12">
-                                        <select id="inputVAT2" name="inputVAT2" class="form-select mb-2">
-                                                <option value="0">0%</option>
-                                              </select>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <button type="button" class="btn">Update All Products VAT Manage</button>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary">Save</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End of Modal for VAT -->
-        <!-- Modal for New Department -->
-        <div class="modal fade" id="newDepModal" tabindex="-1" aria-labelledby="newDepModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="newDepModalLabel">Add New Department</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="card mb-3">
-                            <div>
-                                <div class="mb-3">
-                                    <label for="inputDepartment2" class="col-sm-3 col-form-label">Department</label>
-                                    <div class="col-sm-12">
-                                        <select id="inputDepartment2" name="inputDepartment2" class="form-select mb-2">
-                                                <option value="0">0%</option>
-                                              </select>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="inputSub-Department1" class="col-sm-3 col-form-label">Sub-Department</label>
-                                    <div class="col-sm-12">
-                                        <select id="inputSub-Department1" name="inputSub-Department1" class="form-select mb-2">
-                                                <option value="0">0%</option>
-                                              </select>
-                                    </div>
-                                </div>
-                                <h4 class="card-title mb-4">Age Limit</h4>
-                                <div class="mb-3">
-                                    <label for="inputVATType" class="col-sm-3 col-form-label">VAT Type</label>
-                                    <div class="col-sm-12">
-                                        <select id="inputVATType" name="inputVATType" class="form-select mb-2">
-                                                <option value="0">0%</option>
-                                              </select>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="inputAddSuP" class="col-sm-3 col-form-label">Add Supplier</label>
-                                    <div class="col-sm-12">
-                                        <select id="inputAddSuP" name="inputAddSuP" class="form-select mb-2">
-                                                <option value="0">0%</option>
-                                              </select>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addSupplierModal">Add Supplier</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addSupplierModal">Add Image</button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End for Modal for New Department -->
-        <!-- Modal for Add Supplier -->
-        <div class="modal fade" id="addSupplierModal" tabindex="-1" aria-labelledby="addSupplierModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="addSupplierModalLabel">Supplier Management</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="card mb-3">
-                            <div>
-                                <div class="mb-2">
-                                    <label for="inputNewSupplierName" class="form-label">New Supplier Name</label>
-                                    <input type="text" class="form-control" id="inputNewSupplierName" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="inputDealerType" class="col-sm-3 col-form-label">Dealer Type</label>
-                                    <div class="col-sm-12">
-                                        <select id="inputDealerType" name="inputDealerType" class="form-select mb-2">
-                                                <option value="0">0%</option>
-                                              </select>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="inputDepartment3" class="col-sm-3 col-form-label">Department</label>
-                                    <div class="col-sm-12">
-                                        <select id="inputDepartment3" name="inputDepartment3" class="form-select mb-2">
-                                                <option value="0">0%</option>
-                                              </select>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <button type="button" class="btn">Edit</button>
-                                    <button type="reset" class="btn btn-secondary">Clear</button>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newDepModal">Back</button>
-                        <button type="button" class="btn btn-primary">Save</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End for Add Supplier -->
 
 
         <!-- JavaScript Bundle with Popper -->
@@ -487,6 +289,16 @@
 
             }
         </script>
+
+
+        <!-- Messages -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        {% if messages %} {% for message in messages %} {% if message.tags %}
+        <script>
+            Swal.fire({
+                text: '{{ message }}',
+            })
+        </script> {% endif %} {% endfor %} {% endif %}
 
     </div>
 </body>

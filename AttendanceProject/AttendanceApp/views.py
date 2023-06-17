@@ -23,6 +23,15 @@ installed_apps = ['AttendanceApp']
 def guard(request):
     return render(request, 'AttendanceApp/guard.html')
 
+def add_staff(request):
+    if request.method=='POST':
+        staff_name = request.POST.get('staff_name')
+        which_department = request.POST.get('which_department')
+        data = Staffs.objects.create(staff_name = staff_name, which_department = which_department)
+        data.save()
+        messages.success(request, 'Successfully added the staff.')
+        return redirect('/guard')
+
 def visitor(request):
     staff = Staffs.objects.all()
     if request.method=='POST':
