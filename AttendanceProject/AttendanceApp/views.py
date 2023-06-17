@@ -19,6 +19,16 @@ installed_apps = ['AttendanceApp']
 
 
 def visitor(request):
+    if request.method=='POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        contact_number  = request.POST.get('contact_number')
+        person_to_visit = request.POST.get('person_to_visit')
+        purpose = request.POST.get('purpose')
+        picture = request.FILES["picture"]
+        # data = Schedule.objects.create(gSheetLink = gSheetLink, school_year = school_year, semester = semester)
+        # data.save()
+        return redirect('/visitor')
     return render(request, 'AttendanceApp/visitor.html')
 
 
