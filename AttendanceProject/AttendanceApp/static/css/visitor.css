@@ -1,14 +1,70 @@
-.centered-div {
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Adjust this value to fit your requirements */
-    border: solid 1px red;
+    background: linear-gradient(90deg, rgba(46, 123, 227, 1) 0%, rgba(30, 150, 247, 1) 100%);
 }
 
+.container {
+    padding: 30px 0 30px 0;
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    height: 500px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 10px 10px 42px -4px rgba(0, 0, 0, 0.53);
+}
 
 form {
-    width: 100%;
-    margin: 0 30% 0 30%;
+    width: 360px;
 }
-  
+
+
+/* Button styles */
+
+.btn {
+    padding: .47rem .75rem;
+    width: 100%;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background: linear-gradient(90deg, rgba(46, 123, 227, 1) 0%, rgba(30, 150, 247, 1) 100%);
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    -webkit-transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+}
+
+.btn:hover {
+    color: #fff;
+    background: linear-gradient(90deg, rgba(30, 150, 247, 1) 0%, rgba(46, 123, 227, 1) 100%);
+}
+
+.btn:focus {
+    color: #fff;
+    background: linear-gradient(90deg, rgba(46, 123, 227, 1) 0%, rgba(30, 150, 247, 1) 100%);
+}
+
+
+/* Input Fields */
+
+form-control input {
+    border-color: red;
+}

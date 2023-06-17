@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
+    <meta name="generator" content="Hugo 0.88.1" />
+    <title>Inventory</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sidebars/" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="css/guardLoginStyles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" />
+</head>
+
+
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebarheader" style="background-color: transparent; display: grid;">
+            <img src="img/Group138.png" alt="" style="justify-self: center; align-self: center;">
+            <hr style="color: white;">
+        </div>
+        <div class="navcon">
+            <p>
+                <a class="btn1 btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  Dashboard
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample">
+                <a class="btn2 btn-primary" href="#" role="button">
+                    Dashboard
+                  </a>
+            </div>
+        </div>
+    </div>
+    <div class="contents">
+        <!-- Top Bar -->
+        <div class="header">
+            <nav class="navbar" id="navbar" style="z-index: 101;">
+                <div class="container-fluid">
+                    <button class="btnCollapse" type="button" onclick="toggleNav()"><i class="bi bi-list"></i></button>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Container -->
+        <div class="main">
+            <form class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0 font-size-18">ADD PRODUCT</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Inventory</a></li>
+                                    <li class="breadcrumb-item active">Add Product</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+
+                    <div class="col">
+                        <div class="card mb-2">
+                            <h4 class="card-title mb-4">Product Information</h4>
+                            <div class="mb-1">
+                                <label for="inputBarcode" class="form-label">Barcode</label>
+                                <div class="input-group mb-2">
+                                    <button type="button" class="btn mb-3" data-bs-toggle="modal" data-bs-target="#editModal">Generate</button>
+                                    <input type="text" class="form-control mb-3" id="inputBarcode" />
+                                    <button type="button" class="btn mb-3" data-bs-toggle="modal" data-bs-target="#searchModal">Search</button>
+                                </div>
+                            </div>
+
+                            <div class="mb-2">
+                                <label for="inputPLU" class="form-label">PLU</label>
+                                <input type="text" class="form-control" id="inputPLU" />
+                            </div>
+
+                            <div class="row1">
+                                <div class="col1">
+                                    <label for="inputDescription" class="form-label">Description</label>
+                                    <input type="text" class="form-control" id="inputDescription" />
+                                </div>
+                            </div>
+                            <div class="row" style="padding-left: 12px; padding-top: 14px;">
+                                <div class="form-check col">
+                                    <input class="form-check-input" type="radio" name="radioBtn2" id="radioBtn5" />
+                                    <label class="form-check-label" for="radioBtn5">ABCDE</label>
+                                </div>
+                                <div class="form-check col">
+                                    <input class="form-check-input" type="radio" name="radioBtn2" id="radioBtn6" />
+                                    <label class="form-check-label" for="radioBtn6">abcde</label>
+                                </div>
+                                <div class="form-check col">
+                                    <input class="form-check-input" type="radio" name="radioBtn2" id="radioBtn7" />
+                                    <label class="form-check-label" for="radioBtn7">Abcde</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card mb-2">
+                                <h4 class="card-title mb-4">Department</h4>
+                                <div class="mb-2">
+                                    <label for="inputDepartment" class="form-label">Department</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="inputDepartment" />
+                                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#newDepModal">New</button>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <label for="inputSub-Department" class="form-label">Sub-Department</label>
+                                    <input type="text" class="form-control" id="inputSub-Department" />
+                                </div>
+                                <div class="mb-2">
+                                    <label for="inputSupplier" class="form-label">Supplier</label>
+                                    <input type="text" class="form-control" id="inputSupplier" />
+                                </div>
+                                <div class="mb-2">
+                                    <label for="inputAgeLimit" class="form-label">Age Limit</label>
+                                    <input type="text" class="form-control" id="inputAgeLimit" />
+                                </div>
+                                <div class="mb-2">
+                                    <label for="inputCapacity" class="form-label">Capacity</label>
+                                    <input type="text" class="form-control" id="inputCapacity" />
+                                </div>
+                                <div class="row1 row mb-2">
+                                    <div class="col">
+                                        <label for="inputVAT" class="form-label">VAT</label>
+                                        <div class="input-group mb-0">
+                                            <input type="text" class="form-control" id="inputVAT" />
+                                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#vatModal">VAT</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="col">
+
+                            <!-- Auto add Label -->
+                            <div class="card mb-2">
+                                <h4 class="card-title mb-4">Auto Add Label</h4>
+                                <div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="inputAutoAddLabel" class="form-label">Auto Add Label</label>
+                                            <select id="AutoAddLabel" name="AutoAddLabel" class="form-select mb-2">
+                                        <%--<option selected="selected">Yes</option>--%>
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                      </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Current Selling Price -->
+                            <div class="card mb-2">
+                                <h4 class="card-title mb-4">Current Selling Price</h4>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="inputCurrentSellingPrice" class="form-label">Current Selling Price</label>
+                                        <input type="text" class="form-control" id="inputCurrentSellingPrice" />
+                                    </div>
+                                    <div class="col" style="display: flex; align-items: end;">
+                                        <button class="btn" type="button">Edit</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col">
+                            <div class="card mb-2">
+                                <h4 class="card-title mb-4">Other Information</h4>
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <label for="inputUnitperCase" class="form-label">Unit Per Case</label>
+                                        <input type="text" class="form-control" id="inputUnitperCase" />
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <label for="inputCostperCase" class="form-label">Cost Per Case</label>
+                                        <input type="text" class="form-control" id="inputCostperCase" />
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <label for="inputBuyPrice" class="form-label">Buy Price</label>
+                                        <input type="text" class="form-control" id="inputBuyPrice" />
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <label for="inputPOR" class="form-label">POR%</label>
+                                        <input type="text" class="form-control" id="inputPOR" />
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <label for="inputCurrentStocks" class="form-label">Current Stocks</label>
+                                        <input type="text" class="form-control" id="inputCurrentStocks" />
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <label for="inputNewStocks" class="form-label">New Stocks</label>
+                                        <input class="form-control mb-2" id="inputNewStocks" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                    <label class="form-check-label mb-3" for="flexCheckDefault">
+                            Add Only New Stocks
+                        </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col">
+                            <div class="card">
+                                <div class="row">
+                                    <div class="col">
+                                        <button class="btn mb-3">Save</button>
+                                        <button type="reset" class="btn mb-3">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Modal for Edit -->
+        <div class="modal fade modal-lg" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="editModalLabel">Online Price Search</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="card mb-3">
+                            <div>
+                                <div class="mb-2">
+                                    <div class="mb-3">
+                                        <label for="staticBarcode" class="col-sm-3 col-form-label">Barcode</label>
+                                        <div class="col-sm-12">
+                                            <input type="text" readonly="" class="form-control" id="staticBarcode" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="staticPLU" class="col-sm-3 col-form-label">PLU</label>
+                                        <div class="col-sm-12">
+                                            <input type="text" readonly="" class="form-control" id="staticPLU" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="inputAddLabel1" class="col-sm-4 col-form-label">Add Label</label>
+                                        <div class="col-sm-12">
+                                            <select id="inputAddLabel1" name="inputAddLabel1" class="form-select mb-2">
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+                                                  </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card mb-3">
+                            <div>
+                                <div class="row mb-2">
+                                    <div class="mb-3">
+                                        <label for="inputVAT1" class="col-sm-3 col-form-label">VAT</label>
+                                        <div class="col-sm-12">
+                                            <select id="inputVAT1" name="inputVAT1" class="form-select mb-2">
+                                                    <option value="0">0%</option>
+                                                  </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="inputDepartment1" class="col-sm-4 col-form-label">Department</label>
+                                        <div class="col-sm-12">
+                                            <select id="inputDepartment1" name="inputDepartment1" class="form-select mb-2">
+                                                    <option value="0">0%</option>
+                                                  </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="card mb-3">
+                            <div>
+                                <div class="row mb-2">
+                                    <div class="mb-3">
+                                        <div class="col1" style="text-align: center;">
+                                            <label for="staticDescription" class="form-label" style="text-align: center;">Product Description</label>
+                                            <input type="text" readonly="" class="form-control" id="staticDescription" value="" />
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="card mb-3">
+                            <div>
+                                <div class="row mb-2">
+                                    <div class="mb-2 col" style="display: grid; justify-content: center;">
+                                        <label for="col2" class="form-label" style="text-align: center;">Product Description Text Style</label>
+                                        <div class="col2" id="col1">
+                                            <div class="row" id="row1">
+                                                <div class="form-check col">
+                                                    <input class="form-check-input" type="radio" name="radioBtn3" id="radioBtn8" />
+                                                    <label class="form-check-label" for="radioBtn8">
+                                                            ABCDE
+                                                    </label>
+                                                </div>
+                                                <div class="form-check col">
+                                                    <input class="form-check-input" type="radio" name="radioBtn3" id="radioBtn9" />
+                                                    <label class="form-check-label" for="radioBtn9">
+                                                            abcde
+                                                    </label>
+                                                </div>
+                                                <div class="form-check col">
+                                                    <input class="form-check-input" type="radio" name="radioBtn3" id="radioBtn10" />
+                                                    <label class="form-check-label" for="radioBtn10">
+                                                            Abcde
+                                                    </label>
+                                                </div>
+                                                <div class="form-check col">
+                                                    <input class="form-check-input" type="radio" name="radioBtn3" id="radioBtn11" />
+                                                    <label class="form-check-label" for="radioBtn11">
+                                                            None
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card mb-3">
+                            <div>
+                                <div class="mb-2">
+                                    <div class="mb-3 row">
+                                        <label for="col3" class="form-label" style="text-align: center;">New Price Key</label>
+                                        <div class="col3 mb-3">
+                                            <label for="inputSellingPrice" class="form-label">Selling Price</label>
+                                            <input type="number" class="form-control" id="inputSellingPrice" />
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Modal for Edit -->
+
+        <!-- Modal for Search -->
+        <div class="modal fade modal" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="searchModalLabel">Search Keyword</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card mb-3">
+                            <div>
+                                <div class="row mb-2">
+
+                                    <div class="form-check col">
+                                        <input class="form-check-input" type="radio" name="radioBtn1" id="radioBtn1" />
+                                        <label class="form-check-label" for="radioBtn1">
+                                                    PLU, Barcode, Description
+                                            </label>
+                                    </div>
+                                    <div class="form-check col">
+                                        <input class="form-check-input" type="radio" name="radioBtn1" id="radioBtn2" />
+                                        <label class="form-check-label" for="radioBtn2">
+                                                    Item Code Only
+                                            </label>
+                                    </div>
+
+
+
+                                </div>
+                                <div class="mb-3">
+                                    <label for="searchDataList" class="form-label">Search:</label>
+                                    <input class="form-control" list="datalistOptions" id="searchDataList" />
+                                    <datalist id="datalistOptions">
+                                    <option value="San Francisco"></option>
+                                    <option value="New York"></option>
+                                    <option value="Seattle"></option>
+                                    <option value="Los Angeles"></option>
+                                    <option value="Chicago"></option>
+                                </datalist>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="exampleDataList" class="form-label">Search Results:</label>
+                                    <div class="col-sm-12" style="border: 1px solid rgba(0, 0, 0, .25); height: 200px; border-radius: 5px;">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <button type="button" class="btn">Add</button>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Modal for Search -->
+        <!-- Modal for VAT -->
+        <div class="modal fade" id="vatModal" tabindex="-1" aria-labelledby="vatModalModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="vatModalModalLabel">Value Added Tax</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card mb-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="inputVAT2" class="col-sm-3 col-form-label">VAT Type</label>
+                                    <div class="col-sm-12">
+                                        <select id="inputVAT2" name="inputVAT2" class="form-select mb-2">
+                                                <option value="0">0%</option>
+                                              </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <button type="button" class="btn">Update All Products VAT Manage</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Modal for VAT -->
+        <!-- Modal for New Department -->
+        <div class="modal fade" id="newDepModal" tabindex="-1" aria-labelledby="newDepModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="newDepModalLabel">Add New Department</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card mb-3">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="inputDepartment2" class="col-sm-3 col-form-label">Department</label>
+                                    <div class="col-sm-12">
+                                        <select id="inputDepartment2" name="inputDepartment2" class="form-select mb-2">
+                                                <option value="0">0%</option>
+                                              </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="inputSub-Department1" class="col-sm-3 col-form-label">Sub-Department</label>
+                                    <div class="col-sm-12">
+                                        <select id="inputSub-Department1" name="inputSub-Department1" class="form-select mb-2">
+                                                <option value="0">0%</option>
+                                              </select>
+                                    </div>
+                                </div>
+                                <h4 class="card-title mb-4">Age Limit</h4>
+                                <div class="mb-3">
+                                    <label for="inputVATType" class="col-sm-3 col-form-label">VAT Type</label>
+                                    <div class="col-sm-12">
+                                        <select id="inputVATType" name="inputVATType" class="form-select mb-2">
+                                                <option value="0">0%</option>
+                                              </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="inputAddSuP" class="col-sm-3 col-form-label">Add Supplier</label>
+                                    <div class="col-sm-12">
+                                        <select id="inputAddSuP" name="inputAddSuP" class="form-select mb-2">
+                                                <option value="0">0%</option>
+                                              </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addSupplierModal">Add Supplier</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addSupplierModal">Add Image</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End for Modal for New Department -->
+        <!-- Modal for Add Supplier -->
+        <div class="modal fade" id="addSupplierModal" tabindex="-1" aria-labelledby="addSupplierModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="addSupplierModalLabel">Supplier Management</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card mb-3">
+                            <div>
+                                <div class="mb-2">
+                                    <label for="inputNewSupplierName" class="form-label">New Supplier Name</label>
+                                    <input type="text" class="form-control" id="inputNewSupplierName" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="inputDealerType" class="col-sm-3 col-form-label">Dealer Type</label>
+                                    <div class="col-sm-12">
+                                        <select id="inputDealerType" name="inputDealerType" class="form-select mb-2">
+                                                <option value="0">0%</option>
+                                              </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="inputDepartment3" class="col-sm-3 col-form-label">Department</label>
+                                    <div class="col-sm-12">
+                                        <select id="inputDepartment3" name="inputDepartment3" class="form-select mb-2">
+                                                <option value="0">0%</option>
+                                              </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <button type="button" class="btn">Edit</button>
+                                    <button type="reset" class="btn btn-secondary">Clear</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newDepModal">Back</button>
+                        <button type="button" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End for Add Supplier -->
+
+
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        <!-- https://sweetalert.js.org/guides/ -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <!-- Script -->
+        <script>
+            function toggleNav() {
+                if (document.getElementById("sidebar").style.width == "0px") {
+                    document.getElementById("sidebar").style.width = "300px";
+                } else {
+                    document.getElementById("sidebar").style.width = "0";
+                }
+
+            }
+        </script>
+
+    </div>
+</body>
+
+</html>
