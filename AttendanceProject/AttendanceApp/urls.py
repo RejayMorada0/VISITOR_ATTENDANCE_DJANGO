@@ -16,5 +16,6 @@ urlpatterns = [
     # Login
     path('', views.visitor, name='visitor'),
     path('visitor/', views.visitor, name='visitor'),
+    path('guard/', views.guard, name='guard'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -8,18 +8,20 @@ import csv
 import qrcode
 import uuid
 import os
+import os.path
 import time
 from datetime import datetime
+from PIL import Image
 
 # filter "AND,OR,NOT"
 from django.db.models import Q, Count, Sum
 
 # Create your views here.
 installed_apps = ['AttendanceApp']
+ 
 
-
-# def generate_rfid():
-#     return str(uuid.uuid4())[:8]  
+def guard(request):
+    return render(request, 'AttendanceApp/guard.html')
 
 def visitor(request):
     staff = Staffs.objects.all()
@@ -33,51 +35,25 @@ def visitor(request):
         picture = request.FILES["picture"]
         data = Visitors.objects.create(rfid = rfid, first_name = first_name, last_name = last_name, contact_number = contact_number, person_to_visit_id = person_to_visit, purpose = purpose, picture = picture, status = '')
         data.save()
-        # Generate QR COde
-        def generate_qr_code(data, output_file):
-            # Create a QR code instance
-            qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
 
-            # Add data to the QR code
-            qr.add_data(data)
-            qr.make(fit=True)
+        # BATS START
+        qr = qrcode.make(str(rfid))
 
-            # Create an image from the QR code
-            qr_image = qr.make_image(fill_color="black", back_color="white")
+        # QR code save path / file directory
+        location = os.path.join('media/pictures')
 
-            # Save the image to a file
-            qr_image.save(output_file)
+        # QR code saved
+        qr.save(os.path.join(location,rfid + ".png"))
 
-        # Usage example
-        my_data = rfid  # Replace with your variable or data
-        output_file = "qr_code.png"  # Replace with the desired output file name
+        # change link when deployed
+        os.startfile("http://127.0.0.1:8000/media/pictures/"+rfid+".png")
 
-        context = {'staff':staff, 'output_file': output_file}
-        generate_qr_code(my_data, output_file)
-        # return render(request, 'AttendanceApp/visitor.html', context)
+        # BATS END
+
+        context = {'staff':staff,}
         return redirect('/visitor')
 
     context = {'staff':staff}
     return render(request, 'AttendanceApp/visitor.html', context)
 
-
-def generate_qr_code(reference_id, output_file):
-    # Create a QR code instance
-    qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
-
-    # Add data to the QR code
-    qr.add_data(reference_id)
-    qr.make(fit=True)
-
-    # Create an image from the QR code
-    qr_image = qr.make_image(fill_color="black", back_color="white")
-
-    # Save the image to a file
-    qr_image.save(output_file)
-
-# Usage example
-reference_id = "ABC123"  # Replace with your reference ID
-output_file = "qr_code.png"  # Replace with the desired output file name
-
-generate_qr_code(reference_id, output_file)
  
