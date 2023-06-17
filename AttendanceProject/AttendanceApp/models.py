@@ -3,6 +3,7 @@ from django.db.models import Model
 import os
 
 class Visitors(models.Model):
+    rfid = models.CharField(max_length=50, unique=True)
     first_name = models.CharField(max_length=255, null=True, blank=True)
     last_name = models.CharField(max_length=255, null=True, blank=True)
     contact_number = models.IntegerField(null=True, blank=True)
