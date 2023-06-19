@@ -31,6 +31,24 @@ def add_staff(request):
         data.save()
         messages.success(request, 'Successfully added the staff.')
         return redirect('/guard')
+    
+def staff_acc_cvs(request):
+    if request.method=='POST':
+        messages.success(request, "Hello.")
+        staffcvsfile = request.FILES["staffcvsfile"]
+        decoded_file = staffcvsfile.read().decode('utf-8').splitlines()[1:]
+        reader = csv.reader(decoded_file)
+        print(reader)
+        for row in reader:
+            try:
+                new_revo = Staffs.objects.create(staff_name=str(row[0]), which_department=str(row[1]))
+                new_revo.save()
+                messages.success(request, "The CSV file containing the staff members has been imported successfully.")
+                return redirect('/guard') 
+            except:
+                messages.error(request, "Please ensure the CSV file follows the correct format and does not contain duplicate accounts.")
+                return redirect('/guard')    
+        return redirect('/guard')
 
 def visitor(request):
     staff = Staffs.objects.all()

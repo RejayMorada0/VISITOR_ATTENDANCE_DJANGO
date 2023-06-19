@@ -77,7 +77,7 @@
                             <div class="card mb-2">
                                 <form action="/add_staff" method="post">
                                     {% csrf_token %}
-                                    <h4 class="card-title mb-4">Staff</h4>
+                                    <h4 class="card-title mb-4">Add New Staff Member</h4>
                                     <div class="mb-2">
                                         <label for="inputDepartment" class="form-label">Full Name</label>
                                         <div class="input-group">
@@ -96,6 +96,25 @@
                                 </form>
                             </div>
                         </div>
+
+                        <div class="col">
+                            <div class="card mb-2">
+                                <form action="/staff_acc_cvs" method="post" id="staffcvsfileform" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <h4 class="card-title mb-4">Import Staff in Bulk</h4>
+                                    <div class="row1 row mb-2">
+                                        <div class="col">
+                                            <div class="input-group mb-0">
+                                                <button type="button" class="btn" onclick="document.getElementById('staffcvsfile').click()">Upload CSV File</button>
+                                                <input type="file" style="display:none" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="staffcvsfile" id="staffcvsfile" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
                     </div>
 
                     <div class="col">
@@ -288,6 +307,13 @@
                 }
 
             }
+        </script>
+
+        <!-- Automatic Upload of Files -->
+        <script>
+            $('#staffcvsfile').change(function() {
+                $('#staffcvsfileform').submit();
+            });
         </script>
 
 
