@@ -2,7 +2,8 @@ from django.http import HttpResponse, HttpResponseRedirect, FileResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
 
-from .models import *
+
+from .models import Visitors, Staffs
 
 import csv
 import qrcode
@@ -16,12 +17,27 @@ from PIL import Image
 # filter "AND,OR,NOT"
 from django.db.models import Q, Count, Sum
 
+
+
 # Create your views here.
 installed_apps = ['AttendanceApp']
  
 
 def guard(request):
     return render(request, 'AttendanceApp/guard.html')
+
+
+from django.shortcuts import render
+def search_qrcode(request):
+    if request.method == 'POST':
+        query = request.POST.get('query')
+        search = Visitors.objects.filter(rfid = query)
+        return render (request, 'AttendanceApp/guard.html', {'search': search} )
+
+        
+    
+    return render(request, 'AttendanceApp/guard.html', {'search': search})
+
 
 def add_staff(request):
     if request.method=='POST':
@@ -34,7 +50,6 @@ def add_staff(request):
     
 def staff_acc_cvs(request):
     if request.method=='POST':
-        messages.success(request, "Hello.")
         staffcvsfile = request.FILES["staffcvsfile"]
         decoded_file = staffcvsfile.read().decode('utf-8').splitlines()[1:]
         reader = csv.reader(decoded_file)
@@ -44,11 +59,11 @@ def staff_acc_cvs(request):
                 new_revo = Staffs.objects.create(staff_name=str(row[0]), which_department=str(row[1]))
                 new_revo.save()
                 messages.success(request, "The CSV file containing the staff members has been imported successfully.")
-                return redirect('/guard') 
             except:
                 messages.error(request, "Please ensure the CSV file follows the correct format and does not contain duplicate accounts.")
                 return redirect('/guard')    
         return redirect('/guard')
+    return redirect('/guard')
 
 def visitor(request):
     staff = Staffs.objects.all()

@@ -66,9 +66,18 @@
                                 <label for="inputBarcode" class="form-label">Barcode</label>
                                 <div class="input-group mb-2">
                                     <button type="button" class="btn mb-3" data-bs-toggle="modal" data-bs-target="#editModal">Start Scan</button>
-                                    <input type="text" class="form-control mb-3" id="inputBarcode" />
-                                    <button type="button" class="btn mb-3" data-bs-toggle="modal" data-bs-target="#searchModal">Search</button>
                                 </div>
+
+                                <form id="searchForm" method="post" action="/search_qrcode">
+                                    {% csrf_token %}
+
+
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control mb-3" id="search-input" name="query" autocomplete="off">
+                                        <button type="submit" class="btn mb-3">Search</button>
+                                    </div>
+                                </form>
+
                             </div>
 
                         </div>
@@ -99,18 +108,20 @@
 
                         <div class="col">
                             <div class="card mb-2">
-                                <form action="/staff_acc_cvs" method="post" id="staffcvsfileform" enctype="multipart/form-data">
-                                    {% csrf_token %}
-                                    <h4 class="card-title mb-4">Import Staff in Bulk</h4>
-                                    <div class="row1 row mb-2">
-                                        <div class="col">
+
+                                <h4 class="card-title mb-4">Import Staff in Bulk</h4>
+                                <div class="row1 row mb-2">
+                                    <div class="col">
+                                        <form action="/staff_acc_cvs" method="post" enctype="multipart/form-data" id="staffcvsfileform">
+                                            {% csrf_token %}
                                             <div class="input-group mb-0">
-                                                <button type="button" class="btn" onclick="document.getElementById('staffcvsfile').click()">Upload CSV File</button>
+                                                <button type="button" class="btn btn-primary" onclick="document.getElementById('staffcvsfile').click()">Upload CSV File</button>
                                                 <input type="file" style="display:none" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="staffcvsfile" id="staffcvsfile" required>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
-                                </form>
+                                </div>
+
                             </div>
                         </div>
 
@@ -123,18 +134,17 @@
                             <!-- Auto add Label -->
                             <div class="card mb-2">
                                 <h4 class="card-title mb-4">Search Result</h4>
-                                <div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="inputAutoAddLabel" class="form-label">Auto Add Label</label>
-                                            <select id="AutoAddLabel" name="AutoAddLabel" class="form-select mb-2">
-                                        <!--<option selected="selected">Yes</option>-->
-                                        <option value="yes">Yes</option>
-                                        <option value="no">No</option>
-                                      </select>
+                                <div id="search-results">
 
-                                        </div>
-                                    </div>
+                                    {% for item in search %}
+                                    <img src="{{item.picture.url}}" alt="" width="200px">
+                                    <h4>Name of Visitor: {{ item.first_name }} {{ item.last_name }}</h4>
+                                    <h4>Contact Number: {{ item.contact_number }}</h4>
+                                    <h4>Person to Visit: {{ item.person_to_visit.staff_name }}</h4>
+                                    <h4>Purpose: {{ item.purpose }}</h4>
+                                    {% empty %}
+                                    <h4>No results found.</h4>
+                                    {% endfor %}
                                 </div>
                             </div>
                             <!-- End of Search Result -->
@@ -149,184 +159,107 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="editModalLabel">Online Price Search</h1>
+                        <h1 class="modal-title fs-5" id="editModalLabel">Scan QR Code using Camera</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
 
-                        <div class="card mb-3">
-                            <div>
-                                <div class="mb-2">
-                                    <div class="mb-3">
-                                        <label for="staticBarcode" class="col-sm-3 col-form-label">Barcode</label>
-                                        <div class="col-sm-12">
-                                            <input type="text" readonly="" class="form-control" id="staticBarcode" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="staticPLU" class="col-sm-3 col-form-label">PLU</label>
-                                        <div class="col-sm-12">
-                                            <input type="text" readonly="" class="form-control" id="staticPLU" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="inputAddLabel1" class="col-sm-4 col-form-label">Add Label</label>
-                                        <div class="col-sm-12">
-                                            <select id="inputAddLabel1" name="inputAddLabel1" class="form-select mb-2">
-                                                    <option value="Yes">Yes</option>
-                                                    <option value="No">No</option>
-                                                  </select>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="card mb-3">
-                            <div>
-                                <div class="row mb-2">
-                                    <div class="mb-3">
-                                        <label for="inputVAT1" class="col-sm-3 col-form-label">VAT</label>
-                                        <div class="col-sm-12">
-                                            <select id="inputVAT1" name="inputVAT1" class="form-select mb-2">
-                                                    <option value="0">0%</option>
-                                                  </select>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="inputDepartment1" class="col-sm-4 col-form-label">Department</label>
-                                        <div class="col-sm-12">
-                                            <select id="inputDepartment1" name="inputDepartment1" class="form-select mb-2">
-                                                    <option value="0">0%</option>
-                                                  </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
 
                         <div class="card mb-3">
-                            <div>
-                                <div class="row mb-2">
-                                    <div class="mb-3">
-                                        <div class="col1" style="text-align: center;">
-                                            <label for="staticDescription" class="form-label" style="text-align: center;">Product Description</label>
-                                            <input type="text" readonly="" class="form-control" id="staticDescription" value="" />
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="card mb-3">
-                            <div>
-                                <div class="row mb-2">
-                                    <div class="mb-2 col" style="display: grid; justify-content: center;">
-                                        <label for="col2" class="form-label" style="text-align: center;">Product Description Text Style</label>
-                                        <div class="col2" id="col1">
-                                            <div class="row" id="row1">
-                                                <div class="form-check col">
-                                                    <input class="form-check-input" type="radio" name="radioBtn3" id="radioBtn8" />
-                                                    <label class="form-check-label" for="radioBtn8">
-                                                            ABCDE
-                                                    </label>
-                                                </div>
-                                                <div class="form-check col">
-                                                    <input class="form-check-input" type="radio" name="radioBtn3" id="radioBtn9" />
-                                                    <label class="form-check-label" for="radioBtn9">
-                                                            abcde
-                                                    </label>
-                                                </div>
-                                                <div class="form-check col">
-                                                    <input class="form-check-input" type="radio" name="radioBtn3" id="radioBtn10" />
-                                                    <label class="form-check-label" for="radioBtn10">
-                                                            Abcde
-                                                    </label>
-                                                </div>
-                                                <div class="form-check col">
-                                                    <input class="form-check-input" type="radio" name="radioBtn3" id="radioBtn11" />
-                                                    <label class="form-check-label" for="radioBtn11">
-                                                            None
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="card mb-3">
-                            <div>
-                                <div class="mb-2">
-                                    <div class="mb-3 row">
-                                        <label for="col3" class="form-label" style="text-align: center;">New Price Key</label>
-                                        <div class="col3 mb-3">
-                                            <label for="inputSellingPrice" class="form-label">Selling Price</label>
-                                            <input type="number" class="form-control" id="inputSellingPrice" />
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-
+                            <video id="videoPreview" style="width: 100%;"></video>
+                            <input class="form-control" type="text" id="scannedData" placeholder="Scanned Data" />
                         </div>
 
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
         </div>
         <!-- End of Modal for Edit -->
 
-
-
-        <!-- JavaScript Bundle with Popper -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-        <!-- https://sweetalert.js.org/guides/ -->
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <!-- Script -->
-        <script>
-            function toggleNav() {
-                if (document.getElementById("sidebar").style.width == "0px") {
-                    document.getElementById("sidebar").style.width = "300px";
-                } else {
-                    document.getElementById("sidebar").style.width = "0";
-                }
-
-            }
-        </script>
-
-        <!-- Automatic Upload of Files -->
-        <script>
-            $('#staffcvsfile').change(function() {
-                $('#staffcvsfileform').submit();
-            });
-        </script>
-
-
-        <!-- Messages -->
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        {% if messages %} {% for message in messages %} {% if message.tags %}
-        <script>
-            Swal.fire({
-                text: '{{ message }}',
-            })
-        </script> {% endif %} {% endfor %} {% endif %}
-
     </div>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <!-- https://sweetalert.js.org/guides/ -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Script -->
+    <script>
+        function toggleNav() {
+            if (document.getElementById("sidebar").style.width == "0px") {
+                document.getElementById("sidebar").style.width = "300px";
+            } else {
+                document.getElementById("sidebar").style.width = "0";
+            }
+
+        }
+    </script>
+
+    <!-- Automatic Upload of Files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('#staffcvsfile').change(function() {
+            $('#staffcvsfileform').submit();
+        });
+    </script>
+
+
+    <!-- Messages -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if messages %} {% for message in messages %} {% if message.tags %}
+    <script>
+        Swal.fire({
+            text: '{{ message }}',
+        })
+    </script> {% endif %} {% endfor %} {% endif %}
+
+
+    <script src="https://rawgit.com/zxing-js/library/master/zxing.js"></script>
+    <script>
+        const videoElement = document.getElementById('videoPreview');
+        const scannedDataElement = document.getElementById('scannedData');
+
+        // Request access to the webcam stream
+        navigator.mediaDevices.getUserMedia({
+                video: true
+            })
+            .then(function(stream) {
+                videoElement.srcObject = stream;
+                videoElement.play();
+
+                // Create a code reader instance
+                const codeReader = new ZXing.BrowserQRCodeReader();
+
+                // Start scanning
+                codeReader.decodeFromVideoElement(videoElement, function(result) {
+                    // Handle the scanned QR code result
+                    scannedDataElement.value = result.text;
+                });
+            })
+            .catch(function(error) {
+                console.error('Error accessing webcam:', error);
+            });
+    </script>
+
+    <script>
+        // Add a click event listener to the search button
+        $('#searchButton').click(function() {
+            // Submit the search form
+            $('#searchForm').submit();
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- <script src="../../static/css/js/search.js"></script> -->
+
+
+
+
+    <!-- for auto se -->
+
 </body>
 
 </html>
