@@ -450,6 +450,35 @@ label {
     display: none;
 }
 
+header {
+    background-color: #2788ed;
+    color: #fff;
+    padding: 20px;
+}
+
+.profile-picture {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile-picture img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+section {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+footer {
+    background-color: #f4f4f4;
+    padding: 10px;
+    text-align: center;
+}
+
 @media only screen and (max-width: 1000px) {
     #sidebar {
         width: 0px;

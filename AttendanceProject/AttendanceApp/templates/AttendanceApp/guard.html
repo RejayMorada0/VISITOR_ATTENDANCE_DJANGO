@@ -140,18 +140,45 @@
                             <!-- Auto add Label -->
                             <div class="card mb-2">
                                 <h4 class="card-title mb-4">Search Result</h4>
-                                <div id="search-results">
 
+                                <div class="card mb-2" id="search-results">
                                     {% for item in search %}
-                                    <img src="{{item.picture.url}}" alt="" width="200px">
-                                    <h4>Name of Visitor: {{ item.first_name }} {{ item.last_name }}</h4>
-                                    <h4>Contact Number: {{ item.contact_number }}</h4>
-                                    <h4>Person to Visit: {{ item.person_to_visit.staff_name }}</h4>
-                                    <h4>Purpose: {{ item.purpose }}</h4>
+                                    <header>
+                                        <h1 class="card-title mb-1" style="color: white;">{{ item.first_name }} {{ item.last_name }}</h1>
+                                        <p>Name of Visitor</p>
+                                    </header>
+
+                                    <div class="profile-picture">
+                                        <img src="{{item.picture.url}}" alt="Profile Picture">
+                                    </div>
+
+                                    <section>
+                                        <h1 class="card-title mb-1" style="color: black;">{{ item.contact_number }}</h1>
+                                        <p>Contact Number</p>
+                                    </section>
+
+                                    <section>
+                                        <h1 class="card-title mb-1" style="color: black;">{{ item.person_to_visit.staff_name }}</h1>
+                                        <p>Person to Visit</p>
+                                    </section>
+
+                                    <section>
+                                        <h1 class="card-title mb-1" style="color: black;">{{ item.purpose }}</h1>
+                                        <p>Purpose</p>
+                                    </section>
+
+                                    <footer>
+                                        <p>&copy; 2023 Attendance Visitor App. All rights reserved.</p>
+                                    </footer>
+
                                     {% empty %}
                                     <h4>No results found.</h4>
+
                                     {% endfor %}
                                 </div>
+
+
+
                             </div>
                             <!-- End of Search Result -->
                         </div>
