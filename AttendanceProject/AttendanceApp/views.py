@@ -34,8 +34,6 @@ def search_qrcode(request):
         search = Visitors.objects.filter(rfid = query)
         return render (request, 'AttendanceApp/guard.html', {'search': search} )
 
-        
-    
     return render(request, 'AttendanceApp/guard.html', {'search': search})
 
 
@@ -98,3 +96,6 @@ def visitor(request):
     return render(request, 'AttendanceApp/visitor.html', context)
 
  
+
+def qr_code_scanner_view(request):
+    return render(request, 'AttendanceApp/scan.html')

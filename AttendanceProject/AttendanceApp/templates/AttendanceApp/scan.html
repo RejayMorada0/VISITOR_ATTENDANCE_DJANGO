@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>QR Code Scanner</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/instascan@1.6.0/instascan.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/instascan/2.0.0-rc.2/dist/index.js" integrity="sha512-vybWo2QCh2P1jTLx7W50N3K08p8ed7VsDZDJ9Ro/gvBDG0+lusOVFwbA9zfgBOtndpDm8YYKiagvre3Fq43kSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+</head>
+
+<body>
+    <h1>QR Code Scanner</h1>
+
+    <div id="scanner-container">
+        <video id="scanner" style="width: 100%;"></video>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Create a new scanner instance
+            const scanner = new Instascan.Scanner({
+                video: document.getElementById('scanner')
+            });
+
+            // Listen for a successful scan event
+            scanner.addListener('scan', function(content) {
+                // Handle the scanned data as desired
+                console.log(content);
+            });
+
+            // Start the scanner
+            Instascan.Camera.getCameras().then(function(cameras) {
+                if (cameras.length > 0) {
+                    scanner.start(cameras[0]);
+                } else {
+                    console.error('No cameras found.');
+                }
+            }).catch(function(error) {
+                console.error(error);
+            });
+        });
+    </script>
+</body>
+
+</html>

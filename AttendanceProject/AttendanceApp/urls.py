@@ -20,5 +20,6 @@ urlpatterns = [
     path('add_staff', views.add_staff, name='add_staff'),
     path('staff_acc_cvs', views.staff_acc_cvs, name='staff_acc_cvs'),
     path('search_qrcode', views.search_qrcode, name='search_qrcode'),
+    path('qr-scanner/', qr_code_scanner_view, name='qr_code_scanner'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
