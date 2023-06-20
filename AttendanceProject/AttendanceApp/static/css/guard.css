@@ -446,6 +446,10 @@ label {
     padding-left: 20px;
 }
 
+.hidden {
+    display: none;
+}
+
 @media only screen and (max-width: 1000px) {
     #sidebar {
         width: 0px;

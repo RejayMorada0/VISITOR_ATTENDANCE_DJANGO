@@ -170,20 +170,17 @@
                     </div>
                     <div class="modal-body">
 
-
                         <div class="card mb-3">
                             <video id="preview" style="width: 100%;"></video>
 
-                            <form id="searchForm1" method="post" action="/search_qrcode">
+                            <form method="post" action="/search_qrcode" id="searchForm1">
                                 {% csrf_token %}
                                 <div class="input-group mb-2">
-                                    <input type="text" class="form-control mb-3" id="search-input1" name="query" placeholder="Scanned QR code data" readonly autocomplete="off">
-                                    <button type="submit" class="btn mb-3">Search</button>
+                                    <input type="text" class="form-control mb-3" id="search-input1" name="query" placeholder="Scanned QR code data">
+                                    <button type="submit" class="btn mb-3" id="submit-button">Search</button>
                                 </div>
                             </form>
-                            <!-- <input class="form-control" type="text" id="result" placeholder="Scanned QR code data" readonly> -->
                         </div>
-
 
                     </div>
                     <div class="modal-footer">
@@ -271,6 +268,7 @@
     <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
     <script>
         // Get the video element and input text field
+        const myForm = document.getElementById('searchForm1');
         const video = document.getElementById('preview');
         const resultInput = document.getElementById('search-input1');
 
@@ -283,6 +281,9 @@
         scanner.addListener('scan', function(content) {
             resultInput.value = content; // Display the scanned QR code data in the input field
             scanner.stop(); // Stop scanning for more QR codes
+            if (resultInput.value.trim() !== '') {
+                myForm.submit(); // Automatically submit the form if the input field is filled
+            }
         });
 
         // Start the QR code scanning
