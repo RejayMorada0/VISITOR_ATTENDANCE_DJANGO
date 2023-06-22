@@ -479,6 +479,15 @@ footer {
     text-align: center;
 }
 
+
+/* Rejay */
+
+.logo img {
+    width: 100px;
+    /* Adjust the width as needed */
+    height: auto;
+}
+
 @media only screen and (max-width: 1000px) {
     #sidebar {
         width: 0px;
