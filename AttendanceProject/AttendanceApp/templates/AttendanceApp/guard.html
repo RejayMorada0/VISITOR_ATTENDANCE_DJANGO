@@ -255,73 +255,48 @@
     </script> {% endif %} {% endfor %} {% endif %}
 
 
-    <script src="https://rawgit.com/zxing-js/library/master/zxing.js"></script>
-    <script>
-        const videoElement = document.getElementById('videoPreview');
-        const scannedDataElement = document.getElementById('scannedData');
-
-        // Request access to the webcam stream
-        navigator.mediaDevices.getUserMedia({
-                video: true
-            })
-            .then(function(stream) {
-                videoElement.srcObject = stream;
-                videoElement.play();
-
-                // Create a code reader instance
-                const codeReader = new ZXing.BrowserQRCodeReader();
-
-                // Start scanning
-                codeReader.decodeFromVideoElement(videoElement, function(result) {
-                    // Handle the scanned QR code result
-                    scannedDataElement.value = result.text;
-                });
-            })
-            .catch(function(error) {
-                console.error('Error accessing webcam:', error);
-            });
-    </script>
-
-    <script>
-        // Add a click event listener to the search button
-        $('#searchButton').click(function() {
-            // Submit the search form
-            $('#searchForm').submit();
-        });
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Script for camera -->
     <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
-    <script>
-        // Get the video element and input text field
+     <script>
         const myForm = document.getElementById('searchForm1');
-        const video = document.getElementById('preview');
+        const videoElement = document.getElementById('videoElement');
         const resultInput = document.getElementById('search-input1');
 
-        // Create a new Instascan scanner
-        const scanner = new Instascan.Scanner({
-            video: video
-        });
+        Instascan.Camera.getCameras()
+          .then(function (cameras) {
+            const rearCamera = cameras.find(camera => camera.name.includes('back'));
+            if (rearCamera) {
+              startScanner(rearCamera);
+            }
+            else if (cameras.length > 0) {
+                startScanner(cameras[0]); // Use the first available camera
+            }else {
+              console.log('Rear camera not found.');
+            }
+          })
+          .catch(function (error) {
+            console.log('Error getting cameras:', error);
+          });
 
-        // Add a callback function to handle when a QR code is scanned
-        scanner.addListener('scan', function(content) {
-            resultInput.value = content; // Display the scanned QR code data in the input field
-            scanner.stop(); // Stop scanning for more QR codes
+        // Function to start the scanner with the specified camera
+        function startScanner(camera) {
+          const scanner = new Instascan.Scanner({ video: videoElement, mirror: false });
+          scanner.addListener('scan', function (content) {
+             resultInput.value = content; // Display the scanned QR code data in the input field
+             console.log('Scanned content:', content);
+             scanner.stop(); // Stop scanning for more QR codes
             if (resultInput.value.trim() !== '') {
                 myForm.submit(); // Automatically submit the form if the input field is filled
             }
-        });
-
-        // Start the QR code scanning
-        Instascan.Camera.getCameras().then(function(cameras) {
-            if (cameras.length > 0) {
-                scanner.start(cameras[0]); // Use the first available camera
-            } else {
-                console.error('No cameras found.');
-            }
-        });
-    </script>
+          });
+          Instascan.Camera.getCameras()
+            .then(function () {
+              scanner.start(camera);
+            })
+            .catch(function (error) {
+              console.log('Error starting scanner:', error);
+            });
+        }
+      </script>
 
 </body>
 
