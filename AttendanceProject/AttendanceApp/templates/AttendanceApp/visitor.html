@@ -138,6 +138,16 @@
         })
     </script> {% endif %} {% endfor %} {% endif %}
 
+    {% if response == 'success' %}
+    <script>
+
+      if ("{{qr_link}}") {
+        window.open("{{qr_link}}", '_blank').focus();
+      }
+
+    </script>
+    {% endif %}
+
 </body>
 
 

@@ -36,17 +36,19 @@
             <img src="{%static 'images/logo1.png'%}" alt="" style="justify-self: center; align-self: center; width: 100px;  height: auto;">
             <hr style="color: white;">
         </div>
-        <div class="navcon">
+       <div class="navcon" style="display: flex;">
             <p>
-                <a class="btn1 btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <a class="btn1 btn-primary" href="{%url 'AttendanceApp:guard'%}" style="font-weight: bold;">
                   Dashboard
                 </a>
             </p>
-            <div class="collapse" id="collapseExample">
-                <a class="btn2 btn-primary" href="#" role="button">
-                    Dashboard
-                  </a>
-            </div>
+        </div>
+        <div class="navcon" style="display: flex;">
+            <p>
+                <a class="btn1 btn-primary" href="{%url 'AttendanceApp:guard1'%}" >
+                  Summary
+                </a>
+            </p>
         </div>
     </div>
     <div class="contents">
@@ -144,8 +146,8 @@
                                 <div class="card mb-2" id="search-results">
                                     {% for item in search %}
                                     <header>
-                                        <h1 class="card-title mb-1" style="color: white;">{{ item.first_name }} {{ item.last_name }}</h1>
                                         <p>Name of Visitor</p>
+                                        <h1 class="card-title mb-1" style="color: white;">{{ item.first_name }} {{ item.last_name }}</h1>
                                     </header>
 
                                     <div class="profile-picture">
@@ -153,18 +155,19 @@
                                     </div>
 
                                     <section>
-                                        <h1 class="card-title mb-1" style="color: black;">{{ item.contact_number }}</h1>
                                         <p>Contact Number</p>
+                                        <h1 class="card-title mb-1" style="color: black;">{{ item.contact_number }}</h1>
                                     </section>
 
                                     <section>
-                                        <h1 class="card-title mb-1" style="color: black;">{{ item.person_to_visit.staff_name }}</h1>
                                         <p>Person to Visit</p>
+                                        <h1 class="card-title mb-1" style="color: black;">{{ item.person_to_visit.staff_name }}</h1>
+
                                     </section>
 
                                     <section>
-                                        <h1 class="card-title mb-1" style="color: black;">{{ item.purpose }}</h1>
                                         <p>Purpose</p>
+                                        <h1 class="card-title mb-1" style="color: black;">{{ item.purpose }}</h1>
                                     </section>
 
                                     <footer>
@@ -198,13 +201,13 @@
                     <div class="modal-body">
 
                         <div class="card mb-3">
-                            <video id="preview" style="width: 100%;"></video>
+                             <video id="videoElement" width="100%"></video>
 
-                            <form method="post" action="/search_qrcode" id="searchForm1">
+                            <form method="post" action="/search_qrcode" id="searchForm1" hidden>
                                 {% csrf_token %}
                                 <div class="input-group mb-2">
-                                    <input type="text" class="form-control mb-3" id="search-input1" name="query" placeholder="Scanned QR code data">
-                                    <button type="submit" class="btn mb-3" id="submit-button">Search</button>
+                                    <input type="text" class="form-control mb-3" id="search-input1" name="query" placeholder="Scanned QR code data" hidden>
+                                    <button type="submit" class="btn mb-3" id="submit-button">Search</button hidden>
                                 </div>
                             </form>
                         </div>
@@ -254,7 +257,6 @@
         })
     </script> {% endif %} {% endfor %} {% endif %}
 
-
     <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
      <script>
         const myForm = document.getElementById('searchForm1');
@@ -297,6 +299,8 @@
             });
         }
       </script>
+
+
 
 </body>
 

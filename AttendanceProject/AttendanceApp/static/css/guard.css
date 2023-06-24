@@ -488,6 +488,21 @@ footer {
     height: auto;
 }
 
+#table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
 @media only screen and (max-width: 1000px) {
     #sidebar {
         width: 0px;

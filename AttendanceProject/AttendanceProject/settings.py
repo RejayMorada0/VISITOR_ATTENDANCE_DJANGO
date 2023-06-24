@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'AttendanceProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'visitors_db',
+        'NAME': 'visitor_db',
         'HOST': 'localhost',
         'USER': 'root',
         'PASSWORD': '',

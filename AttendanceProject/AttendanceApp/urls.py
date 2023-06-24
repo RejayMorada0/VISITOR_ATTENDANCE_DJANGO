@@ -17,6 +17,7 @@ urlpatterns = [
     path('', views.visitor, name='visitor'),
     path('visitor/', views.visitor, name='visitor'),
     path('guard/', views.guard, name='guard'),
+    path('guard1/', views.guard1, name='guard1'),
     path('add_staff', views.add_staff, name='add_staff'),
     path('staff_acc_cvs', views.staff_acc_cvs, name='staff_acc_cvs'),
     path('search_qrcode', views.search_qrcode, name='search_qrcode'),

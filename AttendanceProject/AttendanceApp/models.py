@@ -8,7 +8,7 @@ class Visitors(models.Model):
         regex=r'^09\d{9}$',
         message="Enter a valid cellphone number."
     )
-    
+
     rfid = models.CharField(max_length=50, unique=True)
     first_name = models.CharField(max_length=255, null=True, blank=True)
     last_name = models.CharField(max_length=255, null=True, blank=True)
@@ -17,9 +17,10 @@ class Visitors(models.Model):
     purpose = models.CharField(max_length=500, null=True, blank=True)
     picture = models.FileField(upload_to ='pictures/', null=True, blank=True)
     status = models.CharField(max_length=255, null=True, blank=True)
-    
+    timestamp = models.DateTimeField(null=True, blank=True)
+
     class Meta:
-        verbose_name_plural = "Visitors" 
+        verbose_name_plural = "Visitors"
 
 
 class Staffs(models.Model):
@@ -27,4 +28,4 @@ class Staffs(models.Model):
     which_department = models.CharField(max_length=255, null=True, blank=True)
 
     class Meta:
-        verbose_name_plural = "Staffs" 
+        verbose_name_plural = "Staffs"
